@@ -200,9 +200,9 @@ add_executable(mono_kitti
         Examples/Monocular/mono_kitti.cc)
 target_link_libraries(mono_kitti ${PROJECT_NAME})
 
-# add_executable(mono_run
-#         Examples/Monocular/mono_run.cc)
-# target_link_libraries(mono_run ${PROJECT_NAME})
+add_executable(mono_run
+        Examples/Monocular/mono_run.cc)
+target_link_libraries(mono_run ${PROJECT_NAME})
 
 # add_executable(mono_euroc
 #         Examples/Monocular/mono_euroc.cc)

@@ -474,6 +474,73 @@ Sophus::SE3f System::TrackMonocular(const cv::Mat &im, const double &timestamp, 
 }
 
 
+void System::SaveImage(string filename)
+{
+    cv::Mat im = mpFrameDrawer->DrawFrame(1.0);
+    string imgPath = "./image_output/" + filename;
+    // cout << imgPath << endl;
+    cv::imwrite(imgPath, im);
+}
+
+void System::SavePoints(string filename1, string filename2)
+{
+    Map* pActiveMap = mpAtlas->GetCurrentMap();
+    if(!pActiveMap)
+        return;
+
+    const vector<MapPoint*> &vpMPs = pActiveMap->GetAllMapPoints();
+    const vector<MapPoint*> &vpRefMPs = pActiveMap->GetReferenceMapPoints();
+
+    set<MapPoint*> spRefMPs(vpRefMPs.begin(), vpRefMPs.end());
+
+    if(vpMPs.empty())
+        return;
+
+    // glPointSize(mPointSize);
+    // glBegin(GL_POINTS);
+    // glColor3f(0.0,0.0,0.0);
+
+    int counter = 0;
+
+    ofstream f1, f2;
+    f1.open("./image_output/" + filename1);
+    f2.open("./image_output/" + filename2);
+    
+    f1 << fixed;
+    f2 << fixed;
+
+    for(size_t i=0, iend=vpMPs.size(); i<iend;i++)
+    {
+        if(vpMPs[i]->isBad() || spRefMPs.count(vpMPs[i]))
+            continue;
+        Eigen::Matrix<float,3,1> pos = vpMPs[i]->GetWorldPos();
+        // glVertex3f(pos(0),pos(1),pos(2));
+        f1 << setprecision(6) <<  pos(0) << " " << pos(1) << " " << pos(2) << endl;
+        counter++;
+    }
+    // glEnd();
+    cout << "counter1: " << counter << endl;
+    counter = 0;
+
+    // glPointSize(mPointSize);
+    // glBegin(GL_POINTS);
+    // glColor3f(1.0,0.0,0.0);
+
+    for(set<MapPoint*>::iterator sit=spRefMPs.begin(), send=spRefMPs.end(); sit!=send; sit++)
+    {
+        if((*sit)->isBad())
+            continue;
+        Eigen::Matrix<float,3,1> pos = (*sit)->GetWorldPos();
+        // glVertex3f(pos(0),pos(1),pos(2));
+        f2 << setprecision(6) <<  pos(0) << " " << pos(1) << " " << pos(2) << endl;
+        counter++;
+    }
+    cout << "counter2: " << counter << endl;
+
+    f1.close();
+    f2.close();
+}
+
 
 void System::ActivateLocalizationMode()
 {
@@ -569,11 +636,11 @@ bool System::isShutDown() {
 void System::SaveTrajectoryTUM(const string &filename)
 {
     cout << endl << "Saving camera trajectory to " << filename << " ..." << endl;
-    if(mSensor==MONOCULAR)
-    {
-        cerr << "ERROR: SaveTrajectoryTUM cannot be used for monocular." << endl;
-        return;
-    }
+    // if(mSensor==MONOCULAR)
+    // {
+    //     cerr << "ERROR: SaveTrajectoryTUM cannot be used for monocular." << endl;
+    //     return;
+    // }
 
     vector<KeyFrame*> vpKFs = mpAtlas->GetAllKeyFrames();
     sort(vpKFs.begin(),vpKFs.end(),KeyFrame::lId);

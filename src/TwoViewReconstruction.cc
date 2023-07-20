@@ -113,7 +113,7 @@ namespace ORB_SLAM3
         if(SH+SF == 0.f) return false;
         float RH = SH/(SH+SF);
 
-        float minParallax = 1.0;
+        float minParallax = 0.1;
 
         // Try to reconstruct from homography or fundamental depending on the ratio (0.40-0.45)
         if(RH>0.50) // if(RH>0.40)
