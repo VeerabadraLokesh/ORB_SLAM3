@@ -22,6 +22,8 @@
 #include<chrono>
 #include<iomanip>
 
+#include <sys/stat.h>
+
 #include<opencv2/core/core.hpp>
 
 #include"System.h"
@@ -43,6 +45,21 @@ int main(int argc, char **argv)
     vector<string> vstrImageFilenames;
     vector<double> vTimestamps;
     LoadImages(string(argv[3]), vstrImageFilenames, vTimestamps);
+
+    string imageOutDir = string(argv[3]) + "/output_images/";
+    string pointCloudOutDir = string(argv[3]) + "/output_point_clouds/";
+    int dir_err = mkdir(imageOutDir.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+    if (-1 == dir_err)
+    {
+        printf("Error creating directory!n");
+        exit(1);
+    }
+    dir_err = mkdir(pointCloudOutDir.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+    if (-1 == dir_err)
+    {
+        printf("Error creating directory!n");
+        exit(1);
+    }
 
     int nImages = vstrImageFilenames.size();
 
@@ -137,8 +154,8 @@ int main(int argc, char **argv)
         if(ttrack<T)
             usleep((T-ttrack)*1e6);
         
-        SLAM.SaveImage(to_string(ni)+".jpg");
-        SLAM.SavePoints(to_string(ni)+"_1.txt", to_string(ni)+"_2.txt");
+        SLAM.SaveImage(imageOutDir + to_string(ni)+".jpg");
+        SLAM.SavePoints(pointCloudOutDir + to_string(ni)+"_1.txt", pointCloudOutDir + to_string(ni)+"_2.txt");
     }
 
     // Stop all threads
@@ -156,8 +173,8 @@ int main(int argc, char **argv)
     cout << "mean tracking time: " << totaltime/nImages << endl;
 
     // Save camera trajectory
-    SLAM.SaveTrajectoryTUM("CameraTrajectory.txt");
-    SLAM.SaveKeyFrameTrajectoryTUM("KeyFrameTrajectory.txt");    
+    SLAM.SaveTrajectoryTUM(string(argv[3]) + "/CameraTrajectory.txt");
+    SLAM.SaveKeyFrameTrajectoryTUM(string(argv[3]) + "/KeyFrameTrajectory.txt");    
 
     return 0;
 }
