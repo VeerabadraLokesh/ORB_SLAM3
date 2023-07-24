@@ -48,23 +48,26 @@ int main(int argc, char **argv)
 
     string imageOutDir = string(argv[3]) + "/output_images/";
     string pointCloudOutDir = string(argv[3]) + "/output_point_clouds/";
+    cout << imageOutDir << endl;
     int dir_err = mkdir(imageOutDir.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-    if (-1 == dir_err)
-    {
-        printf("Error creating directory!n");
-        exit(1);
-    }
+    // Ignore if dir already exists
+    // if (-1 == dir_err)
+    // {
+    //     cout << "Error creating directory" << endl;
+    //     exit(1);
+    // }
+    cout << pointCloudOutDir << endl;
     dir_err = mkdir(pointCloudOutDir.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-    if (-1 == dir_err)
-    {
-        printf("Error creating directory!n");
-        exit(1);
-    }
+    // if (-1 == dir_err)
+    // {
+    //     cout << "Error creating directory" << endl;
+    //     exit(1);
+    // }
 
     int nImages = vstrImageFilenames.size();
 
     // Create SLAM system. It initializes all system threads and gets ready to process frames.
-    ORB_SLAM3::System SLAM(argv[1],argv[2],ORB_SLAM3::System::MONOCULAR,true);
+    ORB_SLAM3::System SLAM(argv[1],argv[2],ORB_SLAM3::System::MONOCULAR,false);
     float imageScale = SLAM.GetImageScale();
 
     // Vector for tracking time statistics

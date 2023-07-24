@@ -332,7 +332,8 @@ void FrameDrawer::DrawTextInfo(cv::Mat &im, int nState, cv::Mat &imText)
 {
     stringstream s;
     if(nState==Tracking::NO_IMAGES_YET)
-        s << " WAITING FOR IMAGES";
+        // s << " WAITING FOR IMAGES";
+        s << " NO MATCHES FOUND IN THE IMAGE ";
     else if(nState==Tracking::NOT_INITIALIZED)
         s << " TRYING TO INITIALIZE ";
     else if(nState==Tracking::OK)
@@ -354,7 +355,8 @@ void FrameDrawer::DrawTextInfo(cv::Mat &im, int nState, cv::Mat &imText)
     }
     else if(nState==Tracking::SYSTEM_NOT_READY)
     {
-        s << " LOADING ORB VOCABULARY. PLEASE WAIT...";
+        // s << " LOADING ORB VOCABULARY. PLEASE WAIT...";
+        s << " NO FEATURES FOUND IN THE IMAGE ";
     }
 
     int baseline=0;

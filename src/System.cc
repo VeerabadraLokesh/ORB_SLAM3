@@ -477,8 +477,8 @@ Sophus::SE3f System::TrackMonocular(const cv::Mat &im, const double &timestamp, 
 void System::SaveImage(string filename)
 {
     cv::Mat im = mpFrameDrawer->DrawFrame(1.0);
-    string imgPath = "./image_output/" + filename;
-    // cout << imgPath << endl;
+    string imgPath = filename;
+    cout << imgPath << endl;
     cv::imwrite(imgPath, im);
 }
 
@@ -503,8 +503,8 @@ void System::SavePoints(string filename1, string filename2)
     int counter = 0;
 
     ofstream f1, f2;
-    f1.open("./image_output/" + filename1);
-    f2.open("./image_output/" + filename2);
+    f1.open(filename1);
+    f2.open(filename2);
     
     f1 << fixed;
     f2 << fixed;
