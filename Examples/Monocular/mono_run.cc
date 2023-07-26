@@ -87,6 +87,7 @@ int main(int argc, char **argv)
     for(int ni=0; ni<nImages; ni++)
     {
         // Read image from file
+        cout << vstrImageFilenames[ni] << endl;
         im = cv::imread(vstrImageFilenames[ni],cv::IMREAD_UNCHANGED); //,cv::IMREAD_UNCHANGED);
         double tframe = vTimestamps[ni];
 
@@ -209,7 +210,7 @@ void LoadImages(const string &strPathToSequence, vector<string> &vstrImageFilena
     for(int i=0; i<nTimes; i++)
     {
         stringstream ss;
-        ss << setfill('0') << setw(6) << i;
-        vstrImageFilenames[i] = strPrefixLeft + ss.str() + ".jpg";
+        ss << setfill('0') << setw(6) << i+1;
+        vstrImageFilenames[i] = strPrefixLeft + ss.str() + ".png";
     }
 }
