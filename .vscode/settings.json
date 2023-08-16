@@ -8,6 +8,7 @@
         "vector": "cpp",
         "*.ipp": "cpp",
         "set": "cpp",
-        "*.inc": "cpp"
+        "*.inc": "cpp",
+        "chrono": "cpp"
     }
 }

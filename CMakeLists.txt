@@ -42,8 +42,8 @@ MESSAGE("OPENCV VERSION:")
 MESSAGE(${OpenCV_VERSION})
 
 find_package(Eigen3 3.1.0 REQUIRED)
-find_package(Pangolin REQUIRED)
-find_package(realsense2)
+# find_package(Pangolin REQUIRED)
+# find_package(realsense2)
 
 include_directories(
 ${PROJECT_SOURCE_DIR}
@@ -51,7 +51,7 @@ ${PROJECT_SOURCE_DIR}/include
 ${PROJECT_SOURCE_DIR}/include/CameraModels
 ${PROJECT_SOURCE_DIR}/Thirdparty/Sophus
 ${EIGEN3_INCLUDE_DIR}
-${Pangolin_INCLUDE_DIRS}
+# ${Pangolin_INCLUDE_DIRS}
 )
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
@@ -121,7 +121,7 @@ add_subdirectory(Thirdparty/g2o)
 target_link_libraries(${PROJECT_NAME}
 ${OpenCV_LIBS}
 ${EIGEN3_LIBS}
-${Pangolin_LIBRARIES}
+# ${Pangolin_LIBRARIES}
 ${PROJECT_SOURCE_DIR}/Thirdparty/DBoW2/lib/libDBoW2.so
 ${PROJECT_SOURCE_DIR}/Thirdparty/g2o/lib/libg2o.so
 -lboost_serialization
@@ -129,14 +129,14 @@ ${PROJECT_SOURCE_DIR}/Thirdparty/g2o/lib/libg2o.so
 )
 
 # If RealSense SDK is found the library is added and its examples compiled
-if(realsense2_FOUND)
-    include_directories(${PROJECT_NAME}
-    ${realsense_INCLUDE_DIR}
-    )
-    target_link_libraries(${PROJECT_NAME}
-    ${realsense2_LIBRARY}
-    )
-endif()
+# if(realsense2_FOUND)
+#     include_directories(${PROJECT_NAME}
+#     ${realsense_INCLUDE_DIR}
+#     )
+#     target_link_libraries(${PROJECT_NAME}
+#     ${realsense2_LIBRARY}
+#     )
+# endif()
 
 
 # Build examples
@@ -179,15 +179,15 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples/Stereo)
 #         Examples/Stereo/stereo_tum_vi.cc)
 # target_link_libraries(stereo_tum_vi ${PROJECT_NAME})
 
-if(realsense2_FOUND)
-    add_executable(stereo_realsense_t265
-            Examples/Stereo/stereo_realsense_t265.cc)
-    target_link_libraries(stereo_realsense_t265 ${PROJECT_NAME})
+# if(realsense2_FOUND)
+#     add_executable(stereo_realsense_t265
+#             Examples/Stereo/stereo_realsense_t265.cc)
+#     target_link_libraries(stereo_realsense_t265 ${PROJECT_NAME})
 
-    add_executable(stereo_realsense_D435i
-            Examples/Stereo/stereo_realsense_D435i.cc)
-    target_link_libraries(stereo_realsense_D435i ${PROJECT_NAME})
-endif()
+#     add_executable(stereo_realsense_D435i
+#             Examples/Stereo/stereo_realsense_D435i.cc)
+#     target_link_libraries(stereo_realsense_D435i ${PROJECT_NAME})
+# endif()
 
 #Monocular examples
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples/Monocular)
@@ -212,15 +212,15 @@ target_link_libraries(mono_run ${PROJECT_NAME})
 #         Examples/Monocular/mono_tum_vi.cc)
 # target_link_libraries(mono_tum_vi ${PROJECT_NAME})
 
-if(realsense2_FOUND)
-    add_executable(mono_realsense_t265
-            Examples/Monocular/mono_realsense_t265.cc)
-    target_link_libraries(mono_realsense_t265 ${PROJECT_NAME})
+# if(realsense2_FOUND)
+#     add_executable(mono_realsense_t265
+#             Examples/Monocular/mono_realsense_t265.cc)
+#     target_link_libraries(mono_realsense_t265 ${PROJECT_NAME})
 
-    add_executable(mono_realsense_D435i
-            Examples/Monocular/mono_realsense_D435i.cc)
-    target_link_libraries(mono_realsense_D435i ${PROJECT_NAME})
-endif()
+#     add_executable(mono_realsense_D435i
+#             Examples/Monocular/mono_realsense_D435i.cc)
+#     target_link_libraries(mono_realsense_D435i ${PROJECT_NAME})
+# endif()
 
 #Monocular inertial examples
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples/Monocular-Inertial)
