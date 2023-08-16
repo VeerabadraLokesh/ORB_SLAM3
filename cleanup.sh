@@ -7,6 +7,8 @@ rm -rf Examples/{Calibration,Monocular-Inertial,REAMDME.md,RGB-D,RGB-D-Inertial,
 
 rm -rf Examples/Monocular/{EuRoC_TimeStamps,TUM_TimeStamps}
 
+rm -f Vocabulary/ORBvoc.txt.tar.gz
+
 # Thirdparty
 # Vocabulary
 # build
