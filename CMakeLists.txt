@@ -196,9 +196,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples/Monocular)
 #         Examples/Monocular/mono_tum.cc)
 # target_link_libraries(mono_tum ${PROJECT_NAME})
 
-add_executable(mono_kitti
-        Examples/Monocular/mono_kitti.cc)
-target_link_libraries(mono_kitti ${PROJECT_NAME})
+# add_executable(mono_kitti
+#         Examples/Monocular/mono_kitti.cc)
+# target_link_libraries(mono_kitti ${PROJECT_NAME})
 
 add_executable(mono_run
         Examples/Monocular/mono_run.cc)
@@ -344,15 +344,15 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples_old/Monocular)
 #         Examples_old/Monocular/mono_tum_vi.cc)
 # target_link_libraries(mono_tum_vi_old ${PROJECT_NAME})
 
-if(realsense2_FOUND)
-    add_executable(mono_realsense_t265_old
-            Examples_old/Monocular/mono_realsense_t265.cc)
-    target_link_libraries(mono_realsense_t265_old ${PROJECT_NAME})
+# if(realsense2_FOUND)
+#     add_executable(mono_realsense_t265_old
+#             Examples_old/Monocular/mono_realsense_t265.cc)
+#     target_link_libraries(mono_realsense_t265_old ${PROJECT_NAME})
 
-    add_executable(mono_realsense_D435i_old
-            Examples_old/Monocular/mono_realsense_D435i.cc)
-    target_link_libraries(mono_realsense_D435i_old ${PROJECT_NAME})
-endif()
+#     add_executable(mono_realsense_D435i_old
+#             Examples_old/Monocular/mono_realsense_D435i.cc)
+#     target_link_libraries(mono_realsense_D435i_old ${PROJECT_NAME})
+# endif()
 
 #Monocular inertial examples
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples_old/Monocular-Inertial)
