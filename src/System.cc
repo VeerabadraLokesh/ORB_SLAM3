@@ -478,7 +478,7 @@ void System::SaveImage(string filename)
 {
     cv::Mat im = mpFrameDrawer->DrawFrame(1.0);
     string imgPath = filename;
-    cout << imgPath << endl;
+    // cout << imgPath << endl;
     cv::imwrite(imgPath, im);
 }
 
@@ -519,7 +519,7 @@ void System::SavePoints(string filename1, string filename2)
         counter++;
     }
     // glEnd();
-    cout << "counter1: " << counter << endl;
+    // cout << "counter1: " << counter << endl;
     counter = 0;
 
     // glPointSize(mPointSize);
@@ -535,7 +535,7 @@ void System::SavePoints(string filename1, string filename2)
         f2 << setprecision(6) <<  pos(0) << " " << pos(1) << " " << pos(2) << endl;
         counter++;
     }
-    cout << "counter2: " << counter << endl;
+    // cout << "counter2: " << counter << endl;
 
     f1.close();
     f2.close();
