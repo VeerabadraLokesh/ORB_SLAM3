@@ -14,10 +14,12 @@ rm -f Vocabulary/ORBvoc.txt.tar.gz
 
 ls -ltr
 
-cd /opt/docker
 du -sh *
 
-eco "done"
+cd /opt/docker
+du -sh /opt/docker/ORB_SLAM3
+
+echo "done"
 
 # Thirdparty
 # Vocabulary
